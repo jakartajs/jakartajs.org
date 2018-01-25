@@ -18,7 +18,7 @@ class EventsPage extends React.Component {
   }
 
   static renderEvents(events) {
-    return events ? events.map(event => (
+    return events.length !== 0 ? events.map(event => (
       <div className={styles.eventCard} key={event.id}>
         <h3 className={styles.eventCardHeading}>{event.name}</h3>
         <time dateTime={new Date(event.time).toISOString()}>
@@ -42,7 +42,7 @@ class EventsPage extends React.Component {
   static renderErrors(errors) {
     return (
       <div className={styles.eventCard}>
-        <h2 style={{ marginTop: 0 }}>Something bad happened.</h2>
+        <h3 style={{ marginTop: 0 }}>Something bad happened.</h3>
         <p>{errors}</p>
       </div>
     );
