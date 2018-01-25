@@ -1,5 +1,7 @@
 import React from 'react';
+import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
+import Helmet from 'react-helmet';
 import moment from 'moment';
 
 import styles from './home.module.scss';
@@ -9,6 +11,18 @@ import Card from '../components/Card';
 import AnchorButton from '../components/AnchorButton';
 
 class EventsPage extends React.Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      site: PropTypes.shape({
+        siteMetadata: PropTypes.shape({
+          title: PropTypes.string,
+          subtitle: PropTypes.string,
+          description: PropTypes.string,
+        }),
+      }),
+    }).isRequired,
+  };
+
   static renderLoading() {
     return (
       <div className={styles.eventCard}>
@@ -80,10 +94,19 @@ class EventsPage extends React.Component {
   }
 
   render() {
+    const { data } = this.props;
     const { loading, errors, events } = this.state;
 
     return (
       <main className={classnames(styles.main, styles.homepageMain)}>
+        <Helmet
+          title={`Events · ${data.site.siteMetadata.title}`}
+          meta={[
+            { name: 'description', content: data.site.siteMetadata.description },
+            { property: 'og:title', content: 'Events' },
+            { property: 'og:description', content: data.site.siteMetadata.description },
+          ]}
+        />
         <div className={classnames(styles.mainHeader)} />
         <HomepageHeader>
           <h1 className={styles.heading}>Events</h1>
@@ -108,3 +131,15 @@ class EventsPage extends React.Component {
 }
 
 export default EventsPage;
+
+export const query = graphql`
+  query EventsPageQuery {
+    site {
+      siteMetadata {
+        title
+        subtitle
+        description
+      }
+    }
+  }
+`;

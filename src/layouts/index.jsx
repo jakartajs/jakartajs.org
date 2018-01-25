@@ -24,9 +24,13 @@ const menuItems = [
 const TemplateWrapper = ({ children, data }) => (
   <div className={styles.root}>
     <Helmet
-      title={`${data.site.siteMetadata.title} - ${data.site.siteMetadata.subtitle}`}
+      title={`${data.site.siteMetadata.title} · ${data.site.siteMetadata.subtitle}`}
       meta={[
         { name: 'description', content: data.site.siteMetadata.description },
+        { property: 'og:site_name', content: data.site.siteMetadata.title },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: data.site.siteMetadata.title },
+        { property: 'og:description', content: data.site.siteMetadata.description },
       ]}
     />
     <Masthead siteName={data.site.siteMetadata.title} menuItems={menuItems} />
