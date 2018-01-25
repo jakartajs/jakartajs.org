@@ -1,0 +1,68 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.main {
+  flex: 1;
+  padding: 1rem;
+  padding-bottom: 5rem;
+}
+
+.mainHeader {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 264px;
+  background-color: $color-grey-900;
+  z-index: -1;
+}
+
+.homepageMainHeader {
+  &:after {
+    content: "";
+    background-image: url('../assets/header.jpg');
+    background-size: cover;
+    background-position-y: center;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+.heading {
+  color: $color-grey-100;
+  text-align: center;
+}
+
+.titleCard {
+  text-align: center;
+
+  .subtitle {
+    margin-top: 0;
+  }
+}
+
+.eventCard {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: $color-grey-200;
+  border-radius: 5px;
+
+  &:first-of-type {
+    margin-top: 1rem;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.eventCardHeading {
+  margin-top: 0;
+}

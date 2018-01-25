@@ -1,0 +1,10 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.root {
+  width: 100%;
+  padding: 1rem;
+  background-color: $color-white;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}

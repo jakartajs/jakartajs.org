@@ -1,0 +1,26 @@
+code,
+pre {
+  font-family: $font-family-monospace;
+}
+
+code {
+  padding: .25em .5em;
+  border-radius: 3px;
+  background-color: darken($color-bg, 10%);
+  color: lighten($color-body, 10%);
+  font-size: 85%;
+}
+
+pre {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  code {
+    padding: 0;
+    background-color: transparent;
+    color: $color-grey-800;
+    font-size: 100%;
+  }
+}

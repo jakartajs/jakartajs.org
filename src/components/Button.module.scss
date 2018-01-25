@@ -1,0 +1,47 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.root {
+  display: inline-block;
+  border-radius: 3px;
+  padding: .25rem .5rem;
+  background: transparent;
+  color: $color-body;
+  border: 2px solid $color-body;
+  font-family: $font-family-sans-serif;
+  cursor: pointer;
+
+  @include on-event {
+    text-decoration: none;
+  }
+}
+
+.primary {
+  color: $color-white;
+  background-color: $color-brand-5;
+  border: 2px solid transparent;
+
+  @include on-event {
+    background-color: darken($color-brand-5, 10%);
+  }
+}
+
+.secondary {
+  color: $color-grey-800;
+  background-color: $color-brand-3;
+  border: 2px solid transparent;
+
+  @include on-event {
+    background-color: darken($color-brand-3, 10%);
+  }
+}
+
+.inverted {
+  color: $color-brand-5;
+  background-color: transparent;
+  border: 2px solid $color-brand-5;
+
+  @include on-event {
+    background-color: transparentize($color-grey-900, 0.9%);
+  }
+}

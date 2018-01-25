@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "shallow": false,
+    "render": false,
+    "mount": false,
+    "graphql": false
+  },
+  "plugins": ["react", "prefer-object-spread", "compat"],
+  "rules": {
+    "max-len": ["error", 120],
+    "linebreak-style": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-danger": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+  }
+}

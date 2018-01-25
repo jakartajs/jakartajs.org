@@ -1,0 +1,15 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.root {
+  padding: 1rem 0 3rem;
+  text-align: center;
+  color: $color-grey-100;
+}
+
+.inner {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
