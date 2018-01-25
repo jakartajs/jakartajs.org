@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "jakarta.js.org",
+  "description": "Source code for https://jakarta.js.org",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Resi Respati <resi.respati@gmail.com>",
   "dependencies": {
     "classnames": "^2.2.5",
     "dotenv": "^4.0.0",
