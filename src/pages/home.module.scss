@@ -47,6 +47,14 @@
   }
 }
 
+.eventsPage {
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .eventCard {
   width: 100%;
   margin-bottom: 1rem;
@@ -56,10 +64,6 @@
 
   &:first-of-type {
     margin-top: 1rem;
-  }
-
-  &:last-of-type {
-    margin-bottom: 0;
   }
 
   p {

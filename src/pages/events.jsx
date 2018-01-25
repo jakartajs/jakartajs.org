@@ -89,11 +89,17 @@ class EventsPage extends React.Component {
           <h1 className={styles.heading}>Events</h1>
         </HomepageHeader>
         <PageContainer>
-          <Card>
+          <Card className={styles.eventsPage}>
             <p className="lead">Our meetups are normally held on the 2nd or 3rd Tuesday of any month.</p>
             <h2>Upcoming Events</h2>
             {loading ? EventsPage.renderLoading() : EventsPage.renderEvents(events)}
             {errors ? EventsPage.renderErrors(errors) : null}
+
+            <p>
+              <AnchorButton href="https://www.meetup.com/JakartaJS/events/past/" newTab>
+                View Past Events
+              </AnchorButton>
+            </p>
           </Card>
         </PageContainer>
       </main>
