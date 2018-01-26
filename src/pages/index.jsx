@@ -30,7 +30,6 @@ const IndexPage = ({ data }) => (
           Come and meet other developers &amp; industry leaders interested in JavaScript and its ecosystem
           in the Greater Jakarta area.
         </p>
-        <LinkButton kind="inverted" href="/about/" to="/about/">About Us</LinkButton>{' '}
         <AnchorButton href="https://jakartajs-join.herokuapp.com/" newTab>Join Slack</AnchorButton>
       </Card>
     </PageContainer>
