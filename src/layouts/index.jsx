@@ -12,10 +12,6 @@ import Footer from '../components/Footer';
 
 const menuItems = [
   {
-    name: 'About',
-    path: '/about',
-  },
-  {
     name: 'Events',
     path: '/events',
   },
