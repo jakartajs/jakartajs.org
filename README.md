@@ -1,6 +1,6 @@
-# jakarta.js.org
+# jakartajs.org
 
-> Source code for https://jakarta.js.org/
+> Source code for https://jakartajs.org/
 
 This project is based on the default Gatsby starter
 
