@@ -11,7 +11,7 @@ module.exports = {
     title: 'JakartaJS',
     subtitle: 'Jakarta JavaScript User Group',
     description: 'Come and meet other developers interested in the JavaScript and its ecosystem in the Greater Jakarta area.',
-    siteUrl: 'https://jakartajs.org',
+    siteUrl: 'https://www.jakartajs.org',
   },
   plugins: [
     {
@@ -40,7 +40,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://jakartajs.org',
+        siteUrl: 'https://www.jakartajs.org',
       },
     },
     {
