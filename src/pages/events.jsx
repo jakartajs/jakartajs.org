@@ -119,7 +119,7 @@ class EventsPage extends React.Component {
             {errors ? EventsPage.renderErrors(errors) : null}
 
             <p>
-              <AnchorButton href="https://www.meetup.com/JakartaJS/events/past/" newTab>
+              <AnchorButton kind="inverted" href="https://www.meetup.com/JakartaJS/events/past/" newTab>
                 View Past Events
               </AnchorButton>
             </p>
