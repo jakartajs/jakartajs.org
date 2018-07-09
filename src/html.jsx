@@ -3,11 +3,11 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-let stylesStr;
+let styles;
 if (process.env.NODE_ENV === 'production') {
   try {
     // eslint-disable-next-line
-    stylesStr = require('!raw-loader!../public/styles.css');
+    styles = require('!raw-loader!../public/styles.css');
   } catch (e) {
     // eslint-disable-next-line
     console.log(e);
@@ -25,7 +25,7 @@ module.exports = class HTML extends React.Component {
   render() {
     let css;
     if (process.env.NODE_ENV === 'production') {
-      css = <style id="gatsby-inlined-css" dangerouslySetInnerHTML={{ __html: stylesStr }} />;
+      css = <style id="gatsby-inlined-css" dangerouslySetInnerHTML={{ __html: styles }} />;
     }
     return (
       <html lang="en" {...this.props.htmlAttributes}>

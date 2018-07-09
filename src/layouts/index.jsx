@@ -1,9 +1,12 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
 
+import 'typeface-ibm-plex-mono';
+import 'typeface-ibm-plex-sans';
 import 'normalize.css';
 import '../styles/globals';
 

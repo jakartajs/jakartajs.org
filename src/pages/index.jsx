@@ -1,6 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import styled from 'react-emotion';
 
 import HomepageHeader from '../components/HomepageHeader';
 import Container from '../components/layout/Container';
@@ -9,7 +10,7 @@ import { HeaderImage } from '../assets/images';
 import HomepageHeaderImage from '../components/home/HomepageHeaderImage';
 import HomepageHeaderInner from '../components/home/HomepageHeaderInner';
 import HomepageHeaderCard from '../components/home/HomepageHeaderCard';
-import styled from '../../node_modules/react-emotion';
+import NextEventSection from '../components/home/NextEventSection';
 
 const IndexPage = ({ data }) => (
   <PageMain>
@@ -33,10 +34,26 @@ const IndexPage = ({ data }) => (
         </Container>
       </HomepageHeaderInner>
     </HomepageHeader>
-    <div>
-      <h2>Next Event</h2>
-      <p>something</p>
-    </div>
+    <NextEventSection>
+      <Container>
+        <div style={{ padding: '1rem', textAlign: 'center' }}>
+          <span>Next Event</span>
+          <h1>#40 JakartaJS July Meetup with Tiket.com</h1>
+          <p>
+            <small>
+              <strong>Tiket.com</strong> &middot; Jalan K.H. Mas Mansyur, RT.2/RW.8, Kebon Melati, Central Jakarta City,
+              Jakarta Graha Niaga Thamrin 5th Floor
+            </small>
+          </p>
+        </div>
+        <div
+          style={{ maxWidth: '768px', margin: '0 auto' }}
+          dangerouslySetInnerHTML={{
+            __html: `<p>Hello JavaScript Ninjas!</p>`,
+          }}
+        />
+      </Container>
+    </NextEventSection>
   </PageMain>
 );
 

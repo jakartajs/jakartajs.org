@@ -11,13 +11,12 @@ HomepageHeader.propTypes = {
 
 export default HomepageHeader;
 
-const HomepageHeaderRoot = styled('div')`
+const HomepageHeaderRoot = styled('section')`
   display: block;
   position: relative;
   overflow: hidden;
   background-color: ${props => props.theme.colors.brand};
   color: ${props => props.theme.pallette.grey100};
-  height: 100vh;
 
   @media screen and (min-width: ${props => formatPx(props.theme.pxSizes.breakpoints.lg)}) {
     height: 600px;

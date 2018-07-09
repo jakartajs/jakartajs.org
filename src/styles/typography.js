@@ -13,7 +13,7 @@ export default css`
     margin-top: 1.414rem;
     margin-bottom: 0.5rem;
     color: ${theme.colors.heading};
-    font-family: ${theme.fonts.sansSerif};
+    font-family: ${theme.fonts.monospace};
     font-weight: 400;
     line-height: 1.25;
     text-rendering: optimizeLegibility;

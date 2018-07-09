@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { transparentize } from 'polished';
 import * as PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import styled from 'react-emotion';
@@ -94,6 +95,7 @@ const MastheadNavLink = styled(Link)`
   height: 100%;
   margin: 0 1rem;
   padding: 0.25rem 0;
+  color: ${props => transparentize(0.3, props.theme.pallette.grey100)};
 
   &:first-of-type {
     margin-left: 0;
@@ -106,10 +108,10 @@ const MastheadNavLink = styled(Link)`
   &:hover,
   &:focus {
     text-decoration: none;
-    border-bottom: 3px solid ${props => props.theme.colors.brand};
+    color: ${props => props.theme.pallette.grey100};
   }
 
   &.is-active {
-    border-bottom: 3px solid ${props => props.theme.colors.brand};
+    color: ${props => props.theme.pallette.grey100};
   }
 `;

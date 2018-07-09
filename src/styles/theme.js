@@ -33,9 +33,9 @@ const theme = {
   /* eslint-disable max-len */
   fonts: {
     sansSerif:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif",
+      "'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif",
     serif: "Georgia, 'Times New Roman', Times, serif",
-    monospace: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, monospace",
+    monospace: "'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, monospace",
   },
   /* eslint-enable max-len */
   emSizes: {

@@ -22,24 +22,21 @@ export default css`
     box-sizing: inherit;
   }
 
-  html {
-    font-family: ${theme.fonts.sansSerif};
-    font-size: ${formatPx(theme.pxSizes.fontSizes.md)};
-    line-height: ${theme.emSizes.lineHeight.body};
-
-    @media (min-width: ${formatPx(theme.pxSizes.breakpoints.lg)}) {
-      font-size: ${formatPx(theme.pxSizes.fontSizes.lg)};
-    }
-  }
-
   body {
     color: ${theme.colors.body};
     background-color: ${theme.colors.background};
+    font-family: ${theme.fonts.sansSerif};
+    font-size: ${formatPx(theme.pxSizes.fontSizes.md)};
+    line-height: ${theme.emSizes.lineHeight.body};
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+
+    @media (min-width: ${formatPx(theme.pxSizes.breakpoints.lg)}) {
+      font-size: ${formatPx(theme.pxSizes.fontSizes.lg)};
+    }
   }
 
   a {
