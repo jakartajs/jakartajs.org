@@ -1,22 +1,16 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import classnames from 'classnames';
 
-import styles from '../pages/home.module.scss';
-import HomepageHeader from '../components/HomepageHeader';
 import PageContainer from '../components/PageContainer';
-import MarkdownContent from '../components/MarkdownContent';
-import Card from '../components/Card';
+import MarkdownContent from '../components/page/MarkdownContent';
+import Card from '../components/layout/Card';
 
 const PageTemplate = ({ data }) => {
   const { markdownRemark } = data;
 
   return (
-    <main className={classnames(styles.main, styles.homepageMain)}>
-      <div className={classnames(styles.mainHeader)} />
-      <HomepageHeader>
-        <h1 className={styles.heading}>{markdownRemark.frontmatter.title}</h1>
-      </HomepageHeader>
+    <main>
+      <h1>{markdownRemark.frontmatter.title}</h1>
       <PageContainer>
         <Card>
           <MarkdownContent html={markdownRemark.html} />

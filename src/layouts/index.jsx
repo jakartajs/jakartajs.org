@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import styled from 'react-emotion';
+import { ThemeProvider } from 'emotion-theming';
 
 import 'normalize.css';
-import '../styles/globals.scss';
+import '../styles/globals';
 
-import styles from './index.module.scss';
-
-import Masthead from '../components/Masthead';
-import Footer from '../components/Footer';
+import Masthead from '../components/layout/Masthead';
+import Footer from '../components/layout/Footer';
+import theme from '../styles/theme';
 
 const menuItems = [
   {
@@ -17,22 +18,24 @@ const menuItems = [
   },
 ];
 
-const TemplateWrapper = ({ children, data }) => (
-  <div className={styles.root}>
-    <Helmet
-      title={`${data.site.siteMetadata.title} · ${data.site.siteMetadata.subtitle}`}
-      meta={[
-        { name: 'description', content: data.site.siteMetadata.description },
-        { property: 'og:site_name', content: data.site.siteMetadata.title },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: data.site.siteMetadata.title },
-        { property: 'og:description', content: data.site.siteMetadata.description },
-      ]}
-    />
-    <Masthead siteName={data.site.siteMetadata.title} menuItems={menuItems} />
-    {children()}
-    <Footer siteName={data.site.siteMetadata.title} />
-  </div>
+const TemplateWrapper = ({ children, data, location }) => (
+  <ThemeProvider theme={theme}>
+    <Root>
+      <Helmet
+        title={`${data.site.siteMetadata.title} · ${data.site.siteMetadata.subtitle}`}
+        meta={[
+          { name: 'description', content: data.site.siteMetadata.description },
+          { property: 'og:site_name', content: data.site.siteMetadata.title },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: data.site.siteMetadata.title },
+          { property: 'og:description', content: data.site.siteMetadata.description },
+        ]}
+      />
+      <Masthead siteName={data.site.siteMetadata.title} isHomepage={location.pathname === '/'} menuItems={menuItems} />
+      {children()}
+      <Footer siteName={data.site.siteMetadata.title} />
+    </Root>
+  </ThemeProvider>
 );
 
 TemplateWrapper.propTypes = {
@@ -46,6 +49,7 @@ TemplateWrapper.propTypes = {
       }),
     }),
   }).isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
 export default TemplateWrapper;
@@ -60,4 +64,10 @@ export const query = graphql`
       }
     }
   }
+`;
+
+const Root = styled('div')`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;

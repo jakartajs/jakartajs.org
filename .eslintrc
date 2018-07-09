@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": "airbnb",
+  "extends": ["airbnb", "plugin:prettier/recommended"],
   "parser": "babel-eslint",
   "env": {
     "browser": true
@@ -17,6 +17,7 @@
     "linebreak-style": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-danger": "off",
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "prettier/prettier": "error"
   }
 }

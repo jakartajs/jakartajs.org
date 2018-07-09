@@ -1,17 +1,18 @@
 import React from 'react';
-import classnames from 'classnames';
 import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-import styles from './home.module.scss';
 import HomepageHeader from '../components/HomepageHeader';
-import PageContainer from '../components/PageContainer';
-import Card from '../components/Card';
-import LinkButton from '../components/LinkButton';
-import AnchorButton from '../components/AnchorButton';
+import Container from '../components/layout/Container';
+import PageMain from '../components/page/PageMain';
+import { HeaderImage } from '../assets/images';
+import HomepageHeaderImage from '../components/home/HomepageHeaderImage';
+import HomepageHeaderInner from '../components/home/HomepageHeaderInner';
+import HomepageHeaderCard from '../components/home/HomepageHeaderCard';
+import styled from '../../node_modules/react-emotion';
 
 const IndexPage = ({ data }) => (
-  <main className={classnames(styles.main, styles.homepageMain)}>
+  <PageMain>
     <Helmet
       meta={[
         { name: 'description', content: data.site.siteMetadata.description },
@@ -19,22 +20,24 @@ const IndexPage = ({ data }) => (
         { property: 'og:description', content: data.site.siteMetadata.description },
       ]}
     />
-    <div className={classnames(styles.mainHeader, styles.homepageMainHeader)} />
     <HomepageHeader>
-      <h1 className={styles.heading}>JakartaJS</h1>
+      <HomepageHeaderImage src={HeaderImage} alt={data.site.siteMetadata.subtitle} />
+      <HomepageHeaderInner>
+        <Container>
+          <HomepageHeaderCard title="Jakarta JavaScript User Group">
+            <LeadText>
+              Come and meet other developers &amp; industry leaders interested in JavaScript and its ecosystem in the
+              Greater Jakarta area.
+            </LeadText>
+          </HomepageHeaderCard>
+        </Container>
+      </HomepageHeaderInner>
     </HomepageHeader>
-    <PageContainer>
-      <Card className={styles.titleCard}>
-        <h2 className={styles.subtitle}>Jakarta JavaScript User Group</h2>
-        <p className="lead">
-          Come and meet other developers &amp; industry leaders interested in JavaScript and its ecosystem
-          in the Greater Jakarta area.
-        </p>
-        <LinkButton kind="inverted" to="/events/">Upcoming Events</LinkButton>{' '}
-        <AnchorButton href="https://jakartajs-join.herokuapp.com/" newTab>Join Slack</AnchorButton>
-      </Card>
-    </PageContainer>
-  </main>
+    <div>
+      <h2>Next Event</h2>
+      <p>something</p>
+    </div>
+  </PageMain>
 );
 
 IndexPage.propTypes = {
@@ -48,6 +51,12 @@ IndexPage.propTypes = {
     }),
   }).isRequired,
 };
+
+const LeadText = styled('p')`
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 300;
+`;
 
 export default IndexPage;
 

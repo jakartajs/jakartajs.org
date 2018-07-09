@@ -1,16 +1,14 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
 
-import styles from './home.module.scss';
 import HomepageHeader from '../components/HomepageHeader';
 import PageContainer from '../components/PageContainer';
-import Card from '../components/Card';
+import Card from '../components/layout/Card';
 
 const NotFoundPage = ({ data }) => (
-  <main className={classnames(styles.main, styles.homepageMain)}>
+  <main>
     <Helmet
       title={`404: Page not found. · ${data.site.siteMetadata.title}`}
       meta={[
@@ -19,15 +17,16 @@ const NotFoundPage = ({ data }) => (
         { property: 'og:description', content: data.site.siteMetadata.description },
       ]}
     />
-    <div className={classnames(styles.mainHeader, styles.homepageMainHeader)} />
     <HomepageHeader>
-      <h1 className={styles.heading}>JakartaJS</h1>
+      <h1>JakartaJS</h1>
     </HomepageHeader>
     <PageContainer>
       <Card>
         <h1>Not Found</h1>
         <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-        <Link href="/" to="/">Go back home</Link>
+        <Link href="/" to="/">
+          Go back home
+        </Link>
       </Card>
     </PageContainer>
   </main>
