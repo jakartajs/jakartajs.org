@@ -16,12 +16,12 @@ import theme from '../styles/theme';
 
 const menuItems = [
   {
-    name: 'Events',
-    path: '/events',
+    name: 'About',
+    path: '/about',
   },
   {
-    name: 'FAQ',
-    path: '/faq',
+    name: 'Events',
+    path: '/events',
   },
 ];
 

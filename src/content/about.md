@@ -3,17 +3,22 @@ layout: page
 title: "About"
 ---
 
-Hey there! We're a group of developers &amp; industry leaders interested in JavaScript and its ecosystem
-in the Greater Jakarta area.
+We are a group of developers &amp; industry leaders interested in JavaScript and its ecosystem in the Greater Jakarta area. We have monthly meetups which are normally held on the 2nd or 3rd Tuesday of any month.
 
-## About this site
+## FAQ
 
-This site is built as part of my talk "Build Your Next Website with React, GatsbyJS, and Netlify". It is used to demonstrate deploying a Gatsby site into a cloud hosting service, in this case [Netlify](https://www.netlify.com/).
+### Are JakartaJS meetups free to attend?
 
-[View the slides here.](https://goo.gl/NgUeoF)
+Yes!
 
-## What is Gatsby?
+### Who are the target audiences
 
-Gatsby is a blazing-fast static site generator for React. It allows you to use the latest web technologies – React, Webpack and GraphQL – to build static pages from whichever source you prefer – from Markdown, to even legacy CMSes like WordPress.
+The target audiences are students, developers, coders, programmers, engineers and related professions.
 
-[Read more about Gatsby here.](https://www.gatsbyjs.org/)
+### Can I come even if I haven't RSVP yet?
+
+Our meetups have restricted spaces, thus it's mandatory to RSVP.
+
+### Is it okay to come late?
+
+Yes, just come and join.

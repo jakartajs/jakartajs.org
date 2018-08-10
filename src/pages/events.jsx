@@ -4,10 +4,11 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import moment from 'moment';
+import styled from 'react-emotion';
 
 import PageContainer from '../components/PageContainer';
 import AnchorButton from '../components/layout/AnchorButton';
-import { EventCard, EventTitle, EventEmpty } from '../components/events/EventCard';
+import { EventCard, EventTitle, EventEmpty, EventLoading } from '../components/events/EventCard';
 import PageHeader from '../components/page/PageHeader';
 import PageMain from '../components/page/PageMain';
 import EventDate from '../components/events/EventCard/EventDate';
@@ -28,11 +29,7 @@ class EventsPage extends React.Component {
   };
 
   static renderLoading() {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    );
+    return <EventLoading />;
   }
 
   static renderEvents(events) {
@@ -109,16 +106,18 @@ class EventsPage extends React.Component {
         <PageHeader>
           <h1>Events</h1>
           <p className="lead">Our meetups are normally held on the 2nd or 3rd Tuesday of any month.</p>
-
-          <AnchorButton href="https://www.meetup.com/JakartaJS/events/past/" newTab>
-            View Past Events
-          </AnchorButton>
         </PageHeader>
         <PageContent>
           <PageContainer>
             {loading
               ? EventsPage.renderLoading()
               : errors ? EventsPage.renderErrors(errors) : EventsPage.renderEvents(events)}
+
+            <ButtonWrapper>
+              <AnchorButton size="large" href="https://www.meetup.com/JakartaJS/events/past/" newTab>
+                View Past Events
+              </AnchorButton>
+            </ButtonWrapper>
           </PageContainer>
         </PageContent>
       </PageMain>
@@ -138,4 +137,9 @@ export const query = graphql`
       }
     }
   }
+`;
+
+const ButtonWrapper = styled('div')`
+  margin-top: 2rem;
+  text-align: center;
 `;

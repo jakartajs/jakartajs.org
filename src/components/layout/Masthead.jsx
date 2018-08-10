@@ -113,5 +113,6 @@ const MastheadNavLink = styled(Link)`
 
   &.is-active {
     color: ${props => props.theme.pallette.grey100};
+    text-decoration: underline;
   }
 `;
