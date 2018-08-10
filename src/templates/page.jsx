@@ -5,18 +5,21 @@ import PageContainer from '../components/PageContainer';
 import MarkdownContent from '../components/page/MarkdownContent';
 import PageMain from '../components/page/PageMain';
 import PageHeader from '../components/page/PageHeader';
+import PageContent from '../components/page/PageContent';
 
 const PageTemplate = ({ data }) => {
   const { markdownRemark } = data;
 
   return (
-    <PageMain>
+    <PageMain isMarkdownPage>
       <PageHeader>
         <h1>{markdownRemark.frontmatter.title}</h1>
       </PageHeader>
-      <PageContainer>
-        <MarkdownContent html={markdownRemark.html} />
-      </PageContainer>
+      <PageContent>
+        <PageContainer>
+          <MarkdownContent html={markdownRemark.html} />
+        </PageContainer>
+      </PageContent>
     </PageMain>
   );
 };
