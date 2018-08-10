@@ -14,6 +14,7 @@ export default PageContainer;
 
 const PageContainerRoot = styled('div')`
   display: flex;
+  flex-direction: column;
   max-width: ${props => formatPx(props.theme.pxSizes.widths.lg)};
   margin: 0 auto;
 `;

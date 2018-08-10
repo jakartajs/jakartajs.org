@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled from 'react-emotion';
 
-import HomepageHeader from '../components/HomepageHeader';
+import HomepageHeader from '../components/home/HomepageHeader';
 import Container from '../components/layout/Container';
 import PageMain from '../components/page/PageMain';
 import { HeaderImage } from '../assets/images';

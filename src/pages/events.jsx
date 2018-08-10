@@ -4,8 +4,10 @@ import Helmet from 'react-helmet';
 import moment from 'moment';
 
 import PageContainer from '../components/PageContainer';
-import Card from '../components/layout/Card';
 import AnchorButton from '../components/layout/AnchorButton';
+import EventCard from '../components/events/EventCard';
+import PageHeader from '../components/page/PageHeader';
+import PageMain from '../components/page/PageMain';
 
 class EventsPage extends React.Component {
   static propTypes = {
@@ -31,7 +33,7 @@ class EventsPage extends React.Component {
   static renderEvents(events) {
     return events.length !== 0 ? (
       events.map(event => (
-        <div key={event.id}>
+        <EventCard key={event.id}>
           <h3>{event.name}</h3>
           <time dateTime={new Date(event.time).toISOString()}>{moment(event.time).format('LLLL')}</time>
           <address>
@@ -39,12 +41,7 @@ class EventsPage extends React.Component {
             <br />
             {event.venue.address_1}
           </address>
-          <div style={{ marginTop: '1rem' }}>
-            <AnchorButton href={event.link} newTab>
-              Join Event
-            </AnchorButton>
-          </div>
-        </div>
+        </EventCard>
       ))
     ) : (
       <div>
@@ -76,14 +73,9 @@ class EventsPage extends React.Component {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     /* eslint-disable max-len */
     const url =
-      'https://api.meetup.com/JakartaJS/events?photo-host=public&sig_id=246266290&sig=a6a15b58298cb18ec8fc6e0565d00e123030e325';
+      'https://api.meetup.com/JakartaJS/events?desc=true&photo-host=public&page=10&sig_id=246266290&status=past&sig=cc814c7fd928ddf63515374e5cc6ced7b20fbca2';
     /* eslint-enable max-len */
-    fetch(proxyUrl + url, {
-      mode: 'cors',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+    fetch(proxyUrl + url)
       .then(res => res.json())
       .then(json =>
         this.setState({
@@ -104,7 +96,7 @@ class EventsPage extends React.Component {
     const { loading, errors, events } = this.state;
 
     return (
-      <main>
+      <PageMain>
         <Helmet
           title={`Events · ${data.site.siteMetadata.title}`}
           meta={[
@@ -113,22 +105,21 @@ class EventsPage extends React.Component {
             { property: 'og:description', content: data.site.siteMetadata.description },
           ]}
         />
-        <h1>Events</h1>
+        <PageHeader>
+          <h1>Events</h1>
+          <p className="lead">Our meetups are normally held on the 2nd or 3rd Tuesday of any month.</p>
+        </PageHeader>
         <PageContainer>
-          <Card>
-            <p className="lead">Our meetups are normally held on the 2nd or 3rd Tuesday of any month.</p>
-            <h2>Upcoming Events</h2>
-            {loading ? EventsPage.renderLoading() : EventsPage.renderEvents(events)}
-            {errors ? EventsPage.renderErrors(errors) : null}
+          {loading ? EventsPage.renderLoading() : EventsPage.renderEvents(events)}
+          {errors ? EventsPage.renderErrors(errors) : null}
 
-            <p>
-              <AnchorButton kind="inverted" href="https://www.meetup.com/JakartaJS/events/past/" newTab>
-                View Past Events
-              </AnchorButton>
-            </p>
-          </Card>
+          <p>
+            <AnchorButton kind="inverted" href="https://www.meetup.com/JakartaJS/events/past/" newTab>
+              View Past Events
+            </AnchorButton>
+          </p>
         </PageContainer>
-      </main>
+      </PageMain>
     );
   }
 }

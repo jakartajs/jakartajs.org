@@ -3,20 +3,21 @@ import * as PropTypes from 'prop-types';
 
 import PageContainer from '../components/PageContainer';
 import MarkdownContent from '../components/page/MarkdownContent';
-import Card from '../components/layout/Card';
+import PageMain from '../components/page/PageMain';
+import PageHeader from '../components/page/PageHeader';
 
 const PageTemplate = ({ data }) => {
   const { markdownRemark } = data;
 
   return (
-    <main>
-      <h1>{markdownRemark.frontmatter.title}</h1>
+    <PageMain>
+      <PageHeader>
+        <h1>{markdownRemark.frontmatter.title}</h1>
+      </PageHeader>
       <PageContainer>
-        <Card>
-          <MarkdownContent html={markdownRemark.html} />
-        </Card>
+        <MarkdownContent html={markdownRemark.html} />
       </PageContainer>
-    </main>
+    </PageMain>
   );
 };
 

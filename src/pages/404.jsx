@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
 
-import HomepageHeader from '../components/HomepageHeader';
 import PageContainer from '../components/PageContainer';
 import Card from '../components/layout/Card';
 
@@ -17,9 +16,6 @@ const NotFoundPage = ({ data }) => (
         { property: 'og:description', content: data.site.siteMetadata.description },
       ]}
     />
-    <HomepageHeader>
-      <h1>JakartaJS</h1>
-    </HomepageHeader>
     <PageContainer>
       <Card>
         <h1>Not Found</h1>

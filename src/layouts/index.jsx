@@ -19,6 +19,10 @@ const menuItems = [
     name: 'Events',
     path: '/events',
   },
+  {
+    name: 'FAQ',
+    path: '/faq',
+  },
 ];
 
 const TemplateWrapper = ({ children, data, location }) => (
