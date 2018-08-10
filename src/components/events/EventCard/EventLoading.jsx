@@ -3,7 +3,13 @@ import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styled from 'react-emotion';
 
-const EventLoading = ({ className }) => <Div className={classnames(className)}>Loading....</Div>;
+import Loading from '../../layout/Loading';
+
+const EventLoading = ({ className }) => (
+  <Div className={classnames(className)}>
+    <Loading />
+  </Div>
+);
 
 EventLoading.propTypes = {
   className: PropTypes.string,

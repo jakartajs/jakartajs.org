@@ -1,6 +1,9 @@
+/* eslint-disable no-nested-ternary */
+
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import moment from 'moment';
 import styled from 'react-emotion';
 
 import HomepageHeader from '../components/home/HomepageHeader';
@@ -10,64 +13,128 @@ import { HeaderImage } from '../assets/images';
 import HomepageHeaderImage from '../components/home/HomepageHeaderImage';
 import HomepageHeaderInner from '../components/home/HomepageHeaderInner';
 import HomepageHeaderCard from '../components/home/HomepageHeaderCard';
-import { NextEventHeader } from '../components/home/NextEvent';
-import NextEventSection from '../components/home/NextEventSection';
-import NextEventContainer from '../components/home/NextEventContainer';
+import {
+  NextEventHeader,
+  NextEventSection,
+  NextEventContainer,
+  NextEventLoading,
+  NextEventEmpty,
+  NextEventError,
+} from '../components/home/NextEvent';
 import AnchorButton from '../components/layout/AnchorButton';
 
-const IndexPage = ({ data }) => (
-  <PageMain>
-    <Helmet
-      meta={[
-        { name: 'description', content: data.site.siteMetadata.description },
-        { property: 'og:title', content: data.site.siteMetadata.subtitle },
-        { property: 'og:description', content: data.site.siteMetadata.description },
-      ]}
-    />
-    <HomepageHeader>
-      <HomepageHeaderImage src={HeaderImage} alt={data.site.siteMetadata.subtitle} />
-      <HomepageHeaderInner>
-        <Container>
-          <HomepageHeaderCard title="Jakarta JavaScript User Group">
-            <LeadText>
-              Come and meet other developers &amp; industry leaders interested in JavaScript and its ecosystem in the
-              Greater Jakarta area.
-            </LeadText>
-          </HomepageHeaderCard>
-        </Container>
-      </HomepageHeaderInner>
-    </HomepageHeader>
-    <NextEventSection>
+class IndexPage extends React.Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      site: PropTypes.shape({
+        siteMetadata: PropTypes.shape({
+          title: PropTypes.string,
+          subtitle: PropTypes.string,
+          description: PropTypes.string,
+        }),
+      }),
+    }).isRequired,
+  };
+
+  static renderLoading() {
+    return <NextEventLoading />;
+  }
+
+  static renderEvent(events) {
+    return events.length !== 0 ? (
       <NextEventHeader>
         <NextEventContainer>
-          <h1>#40 JakartaJS July Meetup with Tiket.com</h1>
+          <h1>{events[0].name}</h1>
+          <p className="lead">
+            <time dateTime={new Date(events[0].time).toISOString()}>{moment(events[0].time).format('LLLL')}</time>
+          </p>
           <p>
-            <strong>Tiket.com</strong>
+            <strong>{events[0].venue.name}</strong>
             <br />
-            Jalan K.H. Mas Mansyur, RT.2/RW.8, Kebon Melati, Central Jakarta City, Jakarta Graha Niaga Thamrin 5th Floor
+            {events[0].venue.address_1}
           </p>
           <ButtonWrapper>
-            <AnchorButton href="" size="large" newTab>
+            <AnchorButton href={events[0].link} size="large" newTab>
               Join Event
             </AnchorButton>
           </ButtonWrapper>
         </NextEventContainer>
       </NextEventHeader>
-    </NextEventSection>
-  </PageMain>
-);
+    ) : (
+      <NextEventEmpty />
+    );
+  }
+  static renderErrors(errors) {
+    return <NextEventError errors={errors} />;
+  }
 
-IndexPage.propTypes = {
-  data: PropTypes.shape({
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string,
-        subtitle: PropTypes.string,
-        description: PropTypes.string,
-      }),
-    }),
-  }).isRequired,
-};
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+      errors: null,
+      events: [],
+    };
+  }
+
+  componentDidMount() {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    /* eslint-disable max-len */
+    const url =
+      'https://api.meetup.com/JakartaJS/events?desc=true&photo-host=public&page=1&sig_id=246266290&sig=ddf6a4c4c3fb24dee8fd3869bc8a2e718763bbbe';
+    /* eslint-enable max-len */
+    fetch(proxyUrl + url)
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          loading: false,
+          events: json,
+        }),
+      )
+      .catch(err =>
+        this.setState({
+          loading: false,
+          errors: err.stack,
+        }),
+      );
+  }
+
+  render() {
+    const { data } = this.props;
+    const { loading, errors, events } = this.state;
+
+    return (
+      <PageMain>
+        <Helmet
+          meta={[
+            { name: 'description', content: data.site.siteMetadata.description },
+            { property: 'og:title', content: data.site.siteMetadata.subtitle },
+            { property: 'og:description', content: data.site.siteMetadata.description },
+          ]}
+        />
+        <HomepageHeader>
+          <HomepageHeaderImage src={HeaderImage} alt={data.site.siteMetadata.subtitle} />
+          <HomepageHeaderInner>
+            <Container>
+              <HomepageHeaderCard title="Jakarta JavaScript User Group">
+                <LeadText>
+                  Come and meet other developers &amp; industry leaders interested in JavaScript and its ecosystem in
+                  the Greater Jakarta area.
+                </LeadText>
+              </HomepageHeaderCard>
+            </Container>
+          </HomepageHeaderInner>
+        </HomepageHeader>
+        <NextEventSection>
+          {loading
+            ? IndexPage.renderLoading()
+            : errors ? IndexPage.renderErrors(errors) : IndexPage.renderEvent(events)}
+        </NextEventSection>
+      </PageMain>
+    );
+  }
+}
 
 const LeadText = styled('p')`
   margin: 0;

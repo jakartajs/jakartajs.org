@@ -11,5 +11,7 @@ NextEventSection.propTypes = {
 export default NextEventSection;
 
 const NextEventRoot = styled('article')`
+  flex: 1 1 auto;
   background-color: ${props => props.theme.pallette.white};
+  min-height: 280px;
 `;
