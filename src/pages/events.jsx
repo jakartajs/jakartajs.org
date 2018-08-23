@@ -40,9 +40,7 @@ class EventsPage extends React.Component {
           <EventDate dateTime={new Date(event.time).toISOString()}>{moment(event.time).format('LLLL')}</EventDate>
           <EventTitle>{event.name}</EventTitle>
           <EventLocation>
-            <strong>{event.venue.name}</strong>
-            &middot;
-            {event.venue.address_1}
+            <strong>{event.venue.name}</strong> &middot; {event.venue.address_1}
           </EventLocation>
         </EventCard>
       ))
