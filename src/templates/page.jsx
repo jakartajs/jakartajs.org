@@ -7,6 +7,7 @@ import MarkdownContent from '../components/page/MarkdownContent';
 import PageMain from '../components/page/PageMain';
 import PageHeader from '../components/page/PageHeader';
 import PageContent from '../components/page/PageContent';
+import PageHeaderContainer from '../components/page/PageHeaderContainer';
 
 const PageTemplate = ({ data }) => {
   const { markdownRemark } = data;
@@ -22,7 +23,9 @@ const PageTemplate = ({ data }) => {
         ]}
       />
       <PageHeader>
-        <h1>{markdownRemark.frontmatter.title}</h1>
+        <PageHeaderContainer>
+          <h1>{markdownRemark.frontmatter.title}</h1>
+        </PageHeaderContainer>
       </PageHeader>
       <PageContent>
         <PageContainer>

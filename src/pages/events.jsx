@@ -14,6 +14,7 @@ import PageMain from '../components/page/PageMain';
 import EventDate from '../components/events/EventCard/EventDate';
 import EventLocation from '../components/events/EventCard/EventLocation';
 import PageContent from '../components/page/PageContent';
+import PageHeaderContainer from '../components/page/PageHeaderContainer';
 
 class EventsPage extends React.Component {
   static propTypes = {
@@ -106,8 +107,17 @@ class EventsPage extends React.Component {
           ]}
         />
         <PageHeader>
-          <h1>Events</h1>
-          <p className="lead">Our meetups are normally held on the 2nd or 3rd Tuesday of any month.</p>
+          <PageHeaderContainer>
+            <h1>Events</h1>
+            <p className="lead">
+              Our meetups are normally held on the 2nd or 3rd Tuesday of any month. Want to be updated on upcoming
+              events?{' '}
+              <a href="https://jakartajs-join.herokuapp.com/" target="_blank" rel="noopener noreferrer">
+                Join our Slack
+              </a>
+              !
+            </p>
+          </PageHeaderContainer>
         </PageHeader>
         <PageContent>
           <PageContainer>

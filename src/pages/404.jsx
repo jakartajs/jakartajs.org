@@ -8,6 +8,7 @@ import PageMain from '../components/page/PageMain';
 import PageHeader from '../components/page/PageHeader';
 import PageContent from '../components/page/PageContent';
 import PageContainer from '../components/page/PageContainer';
+import PageHeaderContainer from '../components/page/PageHeaderContainer';
 
 const NotFoundPage = ({ data }) => (
   <PageMain>
@@ -20,7 +21,9 @@ const NotFoundPage = ({ data }) => (
       ]}
     />
     <PageHeader>
-      <h1>Not Found</h1>
+      <PageHeaderContainer>
+        <h1>Not Found</h1>
+      </PageHeaderContainer>
     </PageHeader>
     <PageContent>
       <ContentInner>
