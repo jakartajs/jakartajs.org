@@ -15,10 +15,7 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
 
   if (node.internal.type === 'MarkdownRemark') {
-    const {
-      permalink,
-      layout,
-    } = node.frontmatter;
+    const { permalink, layout } = node.frontmatter;
     const relativePath = createFilePath({ node, getNode, basePath: 'content' });
 
     let slug = permalink;
@@ -46,18 +43,20 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
 exports.createPages = async ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators;
 
-  const allMarkdown = await graphql(`{
-    allMarkdownRemark {
-      edges {
-        node {
-          fields {
-            slug
-            layout
+  const allMarkdown = await graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
+              layout
+            }
           }
         }
       }
     }
-  }`);
+  `);
 
   if (allMarkdown.errors) throw new Error(allMarkdown.errors);
 
