@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 import moment from 'moment';
 import styled from 'react-emotion';
 
-import PageContainer from '../components/PageContainer';
+import PageContainer from '../components/page/PageContainer';
 import AnchorButton from '../components/layout/AnchorButton';
 import { EventCard, EventTitle, EventEmpty, EventLoading } from '../components/events/EventCard';
 import PageHeader from '../components/page/PageHeader';
@@ -39,7 +39,9 @@ class EventsPage extends React.Component {
           <EventDate dateTime={new Date(event.time).toISOString()}>{moment(event.time).format('LLLL')}</EventDate>
           <EventTitle>{event.name}</EventTitle>
           <EventLocation>
-            <strong>{event.venue.name}</strong> &middot; {event.venue.address_1}
+            <strong>{event.venue.name}</strong>
+            &middot;
+            {event.venue.address_1}
           </EventLocation>
         </EventCard>
       ))
@@ -111,7 +113,9 @@ class EventsPage extends React.Component {
           <PageContainer>
             {loading
               ? EventsPage.renderLoading()
-              : errors ? EventsPage.renderErrors(errors) : EventsPage.renderEvents(events)}
+              : errors
+                ? EventsPage.renderErrors(errors)
+                : EventsPage.renderEvents(events)}
 
             <ButtonWrapper>
               <AnchorButton size="large" href="https://www.meetup.com/JakartaJS/events/past/" newTab>

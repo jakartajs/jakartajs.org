@@ -16,7 +16,7 @@ LinkButton.propTypes = {
   className: PropTypes.string,
   to: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  kind: PropTypes.oneOf(['primary', 'secondary', 'inverted', 'invertedwhite']),
+  kind: PropTypes.oneOf(['primary', 'secondary', 'inverted', 'invertedsecondary', 'invertedwhite']),
   children: PropTypes.node.isRequired,
 };
 

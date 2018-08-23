@@ -7,7 +7,6 @@ import { ThemeProvider } from 'emotion-theming';
 
 import 'typeface-ibm-plex-mono';
 import 'typeface-ibm-plex-sans';
-import 'normalize.css';
 import '../styles/globals';
 
 import Masthead from '../components/layout/Masthead';

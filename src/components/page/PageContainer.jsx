@@ -2,7 +2,7 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-import { formatPx } from '../styles/utils';
+import { formatPx } from '../../styles/utils';
 
 const PageContainer = ({ children }) => <PageContainerRoot>{children}</PageContainerRoot>;
 

@@ -14,7 +14,7 @@ Button.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
-  kind: PropTypes.oneOf(['primary', 'secondary', 'inverted', 'invertedwhite']),
+  kind: PropTypes.oneOf(['primary', 'secondary', 'inverted', 'invertedsecondary', 'invertedwhite']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   children: PropTypes.node.isRequired,
@@ -75,6 +75,17 @@ export const ButtonRoot = styled('button')`
     &:hover,
     &:focus {
       background-color: ${props => transparentize(0.95, props.theme.pallette.black)};
+    }
+  }
+
+  &.invertedsecondary {
+    color: ${props => props.theme.colors.brand};
+    background-color: ${props => props.theme.pallette.white};
+    border: 2px solid transparent;
+
+    &:hover,
+    &:focus {
+      background-color: ${props => darken(0.1, props.theme.pallette.white)};
     }
   }
 

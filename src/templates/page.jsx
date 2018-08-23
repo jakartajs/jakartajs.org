@@ -1,7 +1,8 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 
-import PageContainer from '../components/PageContainer';
+import PageContainer from '../components/page/PageContainer';
 import MarkdownContent from '../components/page/MarkdownContent';
 import PageMain from '../components/page/PageMain';
 import PageHeader from '../components/page/PageHeader';
@@ -12,6 +13,14 @@ const PageTemplate = ({ data }) => {
 
   return (
     <PageMain isMarkdownPage>
+      <Helmet
+        title={`${markdownRemark.frontmatter.title} · ${data.site.siteMetadata.title}`}
+        meta={[
+          { name: 'description', content: data.site.siteMetadata.description },
+          { property: 'og:title', content: '404: Page not found.' },
+          { property: 'og:description', content: data.site.siteMetadata.description },
+        ]}
+      />
       <PageHeader>
         <h1>{markdownRemark.frontmatter.title}</h1>
       </PageHeader>

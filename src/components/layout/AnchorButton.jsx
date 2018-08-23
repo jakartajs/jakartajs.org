@@ -22,7 +22,7 @@ AnchorButton.propTypes = {
   href: PropTypes.string.isRequired,
   newTab: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  kind: PropTypes.oneOf(['primary', 'secondary', 'inverted', 'invertedwhite']),
+  kind: PropTypes.oneOf(['primary', 'secondary', 'inverted', 'invertedsecondary', 'invertedwhite']),
   children: PropTypes.node.isRequired,
 };
 

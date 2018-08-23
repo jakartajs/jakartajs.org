@@ -17,6 +17,7 @@
     "linebreak-style": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-danger": "off",
+    "react/jsx-one-expression-per-line": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "prettier/prettier": "error"
   }

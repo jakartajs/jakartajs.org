@@ -15,7 +15,7 @@ gatsby new gatsby-example-site
 
 ## Develop
 
-A nodejs >= 6.0.0 setup with [yarn](https://yarnpkg.com/) is recommended.
+A nodejs >= 8.0.0 setup with [yarn](https://yarnpkg.com/) is recommended.
 
 ```bash
 # install dependencies
