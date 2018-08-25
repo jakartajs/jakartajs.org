@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import styled from 'react-emotion';
-import { Location } from '@reach/router';
 import { ThemeProvider } from 'emotion-theming';
 
 import 'typeface-ibm-plex-mono';
@@ -26,7 +25,7 @@ const menuItems = [
   },
 ];
 
-const TemplateWrapper = ({ children }) => (
+const TemplateWrapper = ({ children, isHomepage }) => (
   <StaticQuery
     query={graphql`
       query IndexQuery {
@@ -53,15 +52,7 @@ const TemplateWrapper = ({ children }) => (
               { property: 'og:description', content: data.site.siteMetadata.description },
             ]}
           />
-          <Location>
-            {({ location }) => (
-              <Masthead
-                siteName={data.site.siteMetadata.title}
-                isHomepage={location.pathname === '/'}
-                menuItems={menuItems}
-              />
-            )}
-          </Location>
+          <Masthead siteName={data.site.siteMetadata.title} isHomepage={isHomepage} menuItems={menuItems} />
           {children}
           <Footer siteName={data.site.siteMetadata.title} />
         </Root>
@@ -81,6 +72,12 @@ TemplateWrapper.propTypes = {
       }),
     }),
   }).isRequired,
+  isHomepage: PropTypes.bool,
+  location: PropTypes.shape({}).isRequired,
+};
+
+TemplateWrapper.defaultProps = {
+  isHomepage: false,
 };
 
 export default TemplateWrapper;

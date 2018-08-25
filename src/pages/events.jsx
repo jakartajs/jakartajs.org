@@ -16,6 +16,7 @@ import EventDate from '../components/events/EventCard/EventDate';
 import EventLocation from '../components/events/EventCard/EventLocation';
 import PageContent from '../components/page/PageContent';
 import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import TemplateWrapper from '../layouts';
 
 class EventsPage extends React.Component {
   static propTypes = {
@@ -28,6 +29,7 @@ class EventsPage extends React.Component {
         }),
       }),
     }).isRequired,
+    location: PropTypes.shape({}).isRequired,
   };
 
   static renderLoading() {
@@ -92,48 +94,50 @@ class EventsPage extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, location } = this.props;
     const { loading, errors, events } = this.state;
 
     return (
-      <PageMain>
-        <Helmet
-          title={`Events · ${data.site.siteMetadata.title}`}
-          meta={[
-            { name: 'description', content: data.site.siteMetadata.description },
-            { property: 'og:title', content: 'Events' },
-            { property: 'og:description', content: data.site.siteMetadata.description },
-          ]}
-        />
-        <PageHeader>
-          <PageHeaderContainer>
-            <h1>Events</h1>
-            <p className="lead">
-              Our meetups are normally held on the 2nd or 3rd Tuesday of any month. Want to be updated on upcoming
-              events?{' '}
-              <a href="https://jakartajs-join.herokuapp.com/" target="_blank" rel="noopener noreferrer">
-                Join our Slack
-              </a>
-              !
-            </p>
-          </PageHeaderContainer>
-        </PageHeader>
-        <PageContent>
-          <PageContainer>
-            {loading
-              ? EventsPage.renderLoading()
-              : errors
-                ? EventsPage.renderErrors(errors)
-                : EventsPage.renderEvents(events)}
+      <TemplateWrapper location={location}>
+        <PageMain>
+          <Helmet
+            title={`Events · ${data.site.siteMetadata.title}`}
+            meta={[
+              { name: 'description', content: data.site.siteMetadata.description },
+              { property: 'og:title', content: 'Events' },
+              { property: 'og:description', content: data.site.siteMetadata.description },
+            ]}
+          />
+          <PageHeader>
+            <PageHeaderContainer>
+              <h1>Events</h1>
+              <p className="lead">
+                Our meetups are normally held on the 2nd or 3rd Tuesday of any month. Want to be updated on upcoming
+                events?{' '}
+                <a href="https://jakartajs-join.herokuapp.com/" target="_blank" rel="noopener noreferrer">
+                  Join our Slack
+                </a>
+                !
+              </p>
+            </PageHeaderContainer>
+          </PageHeader>
+          <PageContent>
+            <PageContainer>
+              {loading
+                ? EventsPage.renderLoading()
+                : errors
+                  ? EventsPage.renderErrors(errors)
+                  : EventsPage.renderEvents(events)}
 
-            <ButtonWrapper>
-              <AnchorButton size="large" href="https://www.meetup.com/JakartaJS/events/past/" newTab>
-                View Past Events
-              </AnchorButton>
-            </ButtonWrapper>
-          </PageContainer>
-        </PageContent>
-      </PageMain>
+              <ButtonWrapper>
+                <AnchorButton size="large" href="https://www.meetup.com/JakartaJS/events/past/" newTab>
+                  View Past Events
+                </AnchorButton>
+              </ButtonWrapper>
+            </PageContainer>
+          </PageContent>
+        </PageMain>
+      </TemplateWrapper>
     );
   }
 }

@@ -1,16 +1,15 @@
 import React from 'react';
-import classnames from 'classnames';
 import { transparentize } from 'polished';
 import * as PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 
 import { formatPx, formatEm } from '../../styles/utils';
 import Container from './Container';
 import Logo from './Logo';
 
 const Masthead = ({ menuItems, isHomepage }) => (
-  <MastheadRoot className={classnames(isHomepage && 'is-homepage')}>
+  <MastheadRoot isHomepage={isHomepage}>
     <Container>
       <MastheadInner>
         <MastheadLogo>
@@ -46,6 +45,14 @@ Masthead.defaultProps = {
 
 export default Masthead;
 
+const IsHomepage = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: none;
+`;
+
 const MastheadRoot = styled('header')`
   display: flex;
   flex-direction: column;
@@ -57,13 +64,7 @@ const MastheadRoot = styled('header')`
   height: ${props => formatPx(props.theme.pxSizes.heights.header)};
   z-index: 15;
 
-  &.is-homepage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: none;
-  }
+  ${props => props.isHomepage && IsHomepage};
 `;
 
 const MastheadInner = styled('div')`

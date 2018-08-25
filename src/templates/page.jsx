@@ -9,31 +9,34 @@ import PageMain from '../components/page/PageMain';
 import PageHeader from '../components/page/PageHeader';
 import PageContent from '../components/page/PageContent';
 import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import TemplateWrapper from '../layouts';
 
-const PageTemplate = ({ data }) => {
+const PageTemplate = ({ data, location }) => {
   const { markdownRemark } = data;
 
   return (
-    <PageMain isMarkdownPage>
-      <Helmet
-        title={`${markdownRemark.frontmatter.title} · ${data.site.siteMetadata.title}`}
-        meta={[
-          { name: 'description', content: data.site.siteMetadata.description },
-          { property: 'og:title', content: '404: Page not found.' },
-          { property: 'og:description', content: data.site.siteMetadata.description },
-        ]}
-      />
-      <PageHeader>
-        <PageHeaderContainer>
-          <h1>{markdownRemark.frontmatter.title}</h1>
-        </PageHeaderContainer>
-      </PageHeader>
-      <PageContent>
-        <PageContainer>
-          <MarkdownContent html={markdownRemark.html} />
-        </PageContainer>
-      </PageContent>
-    </PageMain>
+    <TemplateWrapper location={location}>
+      <PageMain isMarkdownPage>
+        <Helmet
+          title={`${markdownRemark.frontmatter.title} · ${data.site.siteMetadata.title}`}
+          meta={[
+            { name: 'description', content: data.site.siteMetadata.description },
+            { property: 'og:title', content: '404: Page not found.' },
+            { property: 'og:description', content: data.site.siteMetadata.description },
+          ]}
+        />
+        <PageHeader>
+          <PageHeaderContainer>
+            <h1>{markdownRemark.frontmatter.title}</h1>
+          </PageHeaderContainer>
+        </PageHeader>
+        <PageContent>
+          <PageContainer>
+            <MarkdownContent html={markdownRemark.html} />
+          </PageContainer>
+        </PageContent>
+      </PageMain>
+    </TemplateWrapper>
   );
 };
 
@@ -58,6 +61,7 @@ PageTemplate.propTypes = {
       }),
     }),
   }).isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
 export default PageTemplate;

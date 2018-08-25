@@ -9,33 +9,36 @@ import PageHeader from '../components/page/PageHeader';
 import PageContent from '../components/page/PageContent';
 import PageContainer from '../components/page/PageContainer';
 import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import TemplateWrapper from '../layouts';
 
-const NotFoundPage = ({ data }) => (
-  <PageMain>
-    <Helmet
-      title={`404: Page not found. · ${data.site.siteMetadata.title}`}
-      meta={[
-        { name: 'description', content: data.site.siteMetadata.description },
-        { property: 'og:title', content: '404: Page not found.' },
-        { property: 'og:description', content: data.site.siteMetadata.description },
-      ]}
-    />
-    <PageHeader>
-      <PageHeaderContainer>
-        <h1>Not Found</h1>
-      </PageHeaderContainer>
-    </PageHeader>
-    <PageContent>
-      <ContentInner>
-        <PageContainer>
-          <CodeWrapper>res.status(404).send(&apos;Cannot find this page.&apos;)</CodeWrapper>
-          <Link href="/" to="/">
-            Go back home
-          </Link>
-        </PageContainer>
-      </ContentInner>
-    </PageContent>
-  </PageMain>
+const NotFoundPage = ({ data, location }) => (
+  <TemplateWrapper location={location}>
+    <PageMain>
+      <Helmet
+        title={`404: Page not found. · ${data.site.siteMetadata.title}`}
+        meta={[
+          { name: 'description', content: data.site.siteMetadata.description },
+          { property: 'og:title', content: '404: Page not found.' },
+          { property: 'og:description', content: data.site.siteMetadata.description },
+        ]}
+      />
+      <PageHeader>
+        <PageHeaderContainer>
+          <h1>Not Found</h1>
+        </PageHeaderContainer>
+      </PageHeader>
+      <PageContent>
+        <ContentInner>
+          <PageContainer>
+            <CodeWrapper>res.status(404).send(&apos;Cannot find this page.&apos;)</CodeWrapper>
+            <Link href="/" to="/">
+              Go back home
+            </Link>
+          </PageContainer>
+        </ContentInner>
+      </PageContent>
+    </PageMain>
+  </TemplateWrapper>
 );
 
 NotFoundPage.propTypes = {
@@ -48,6 +51,7 @@ NotFoundPage.propTypes = {
       }),
     }),
   }).isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
 export default NotFoundPage;
