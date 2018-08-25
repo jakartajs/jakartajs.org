@@ -1,36 +1,44 @@
 import React from 'react';
+import styled from 'react-emotion';
 import * as PropTypes from 'prop-types';
-import classnames from 'classnames';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import { Link, graphql } from 'gatsby';
 
-import styles from './home.module.scss';
-import HomepageHeader from '../components/HomepageHeader';
-import PageContainer from '../components/PageContainer';
-import Card from '../components/Card';
+import PageMain from '../components/page/PageMain';
+import PageHeader from '../components/page/PageHeader';
+import PageContent from '../components/page/PageContent';
+import PageContainer from '../components/page/PageContainer';
+import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import TemplateWrapper from '../layouts';
 
-const NotFoundPage = ({ data }) => (
-  <main className={classnames(styles.main, styles.homepageMain)}>
-    <Helmet
-      title={`404: Page not found. · ${data.site.siteMetadata.title}`}
-      meta={[
-        { name: 'description', content: data.site.siteMetadata.description },
-        { property: 'og:title', content: '404: Page not found.' },
-        { property: 'og:description', content: data.site.siteMetadata.description },
-      ]}
-    />
-    <div className={classnames(styles.mainHeader, styles.homepageMainHeader)} />
-    <HomepageHeader>
-      <h1 className={styles.heading}>JakartaJS</h1>
-    </HomepageHeader>
-    <PageContainer>
-      <Card>
-        <h1>Not Found</h1>
-        <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-        <Link href="/" to="/">Go back home</Link>
-      </Card>
-    </PageContainer>
-  </main>
+const NotFoundPage = ({ data, location }) => (
+  <TemplateWrapper location={location}>
+    <PageMain>
+      <Helmet
+        title={`404: Page not found. · ${data.site.siteMetadata.title}`}
+        meta={[
+          { name: 'description', content: data.site.siteMetadata.description },
+          { property: 'og:title', content: '404: Page not found.' },
+          { property: 'og:description', content: data.site.siteMetadata.description },
+        ]}
+      />
+      <PageHeader>
+        <PageHeaderContainer>
+          <h1>Not Found</h1>
+        </PageHeaderContainer>
+      </PageHeader>
+      <PageContent>
+        <ContentInner>
+          <PageContainer>
+            <CodeWrapper>res.status(404).send(&apos;Cannot find this page.&apos;)</CodeWrapper>
+            <Link href="/" to="/">
+              Go back home
+            </Link>
+          </PageContainer>
+        </ContentInner>
+      </PageContent>
+    </PageMain>
+  </TemplateWrapper>
 );
 
 NotFoundPage.propTypes = {
@@ -43,6 +51,7 @@ NotFoundPage.propTypes = {
       }),
     }),
   }).isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
 export default NotFoundPage;
@@ -57,4 +66,21 @@ export const query = graphql`
       }
     }
   }
+`;
+
+const CodeWrapper = styled('div')`
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: ${props => props.theme.colors.body};
+  color: ${props => props.theme.colors.background};
+  font-family: ${props => props.theme.fonts.monospace};
+`;
+
+const ContentInner = styled('div')`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;

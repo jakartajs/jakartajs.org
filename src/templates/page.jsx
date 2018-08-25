@@ -1,28 +1,42 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import classnames from 'classnames';
+import Helmet from 'react-helmet';
+import { graphql } from 'gatsby';
 
-import styles from '../pages/home.module.scss';
-import HomepageHeader from '../components/HomepageHeader';
-import PageContainer from '../components/PageContainer';
-import MarkdownContent from '../components/MarkdownContent';
-import Card from '../components/Card';
+import PageContainer from '../components/page/PageContainer';
+import MarkdownContent from '../components/page/MarkdownContent';
+import PageMain from '../components/page/PageMain';
+import PageHeader from '../components/page/PageHeader';
+import PageContent from '../components/page/PageContent';
+import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import TemplateWrapper from '../layouts';
 
-const PageTemplate = ({ data }) => {
+const PageTemplate = ({ data, location }) => {
   const { markdownRemark } = data;
 
   return (
-    <main className={classnames(styles.main, styles.homepageMain)}>
-      <div className={classnames(styles.mainHeader)} />
-      <HomepageHeader>
-        <h1 className={styles.heading}>{markdownRemark.frontmatter.title}</h1>
-      </HomepageHeader>
-      <PageContainer>
-        <Card>
-          <MarkdownContent html={markdownRemark.html} />
-        </Card>
-      </PageContainer>
-    </main>
+    <TemplateWrapper location={location}>
+      <PageMain isMarkdownPage>
+        <Helmet
+          title={`${markdownRemark.frontmatter.title} · ${data.site.siteMetadata.title}`}
+          meta={[
+            { name: 'description', content: data.site.siteMetadata.description },
+            { property: 'og:title', content: '404: Page not found.' },
+            { property: 'og:description', content: data.site.siteMetadata.description },
+          ]}
+        />
+        <PageHeader>
+          <PageHeaderContainer>
+            <h1>{markdownRemark.frontmatter.title}</h1>
+          </PageHeaderContainer>
+        </PageHeader>
+        <PageContent>
+          <PageContainer>
+            <MarkdownContent html={markdownRemark.html} />
+          </PageContainer>
+        </PageContent>
+      </PageMain>
+    </TemplateWrapper>
   );
 };
 
@@ -47,6 +61,7 @@ PageTemplate.propTypes = {
       }),
     }),
   }).isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
 export default PageTemplate;

@@ -11,14 +11,11 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 
-exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
-  const { createNodeField } = boundActionCreators;
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions;
 
   if (node.internal.type === 'MarkdownRemark') {
-    const {
-      permalink,
-      layout,
-    } = node.frontmatter;
+    const { permalink, layout } = node.frontmatter;
     const relativePath = createFilePath({ node, getNode, basePath: 'content' });
 
     let slug = permalink;
@@ -43,38 +40,46 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   }
 };
 
-exports.createPages = async ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
-  const allMarkdown = await graphql(`{
-    allMarkdownRemark {
-      edges {
-        node {
-          fields {
-            slug
-            layout
+  return new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allMarkdownRemark {
+          edges {
+            node {
+              fields {
+                slug
+                layout
+              }
+            }
           }
         }
       }
-    }
-  }`);
+    `).then(res => {
+      if (res.errors) {
+        reject(res.errors);
+      }
 
-  if (allMarkdown.errors) throw new Error(allMarkdown.errors);
+      res.data.allMarkdownRemark.edges.forEach(({ node }) => {
+        const { slug, layout } = node.fields;
 
-  allMarkdown.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const { slug, layout } = node.fields;
+        createPage({
+          path: slug,
+          // Feel free to set any `layout` as you'd like in the frontmatter, as
+          // long as the corresponding template file exists in src/templates.
+          // If no template is set, it will fall back to the default `page`
+          // template.
+          component: path.resolve(`./src/templates/${layout || 'page'}.jsx`),
+          context: {
+            // Data passed to context is available in page queries as GraphQL variables.
+            slug,
+          },
+        });
+      });
 
-    createPage({
-      path: slug,
-      // Feel free to set any `layout` as you'd like in the frontmatter, as
-      // long as the corresponding template file exists in src/templates.
-      // If no template is set, it will fall back to the default `page`
-      // template.
-      component: path.resolve(`./src/templates/${layout || 'page'}.jsx`),
-      context: {
-        // Data passed to context is available in page queries as GraphQL variables.
-        slug,
-      },
+      resolve();
     });
   });
 };

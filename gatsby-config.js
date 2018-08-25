@@ -4,13 +4,12 @@
 
 require('dotenv').config();
 
-const cssnext = require('postcss-cssnext');
-
 module.exports = {
   siteMetadata: {
     title: 'JakartaJS',
     subtitle: 'Jakarta JavaScript User Group',
-    description: 'Come and meet other developers interested in the JavaScript and its ecosystem in the Greater Jakarta area.',
+    description:
+      'Come and meet other developers interested in the JavaScript and its ecosystem in the Greater Jakarta area.',
     siteUrl: 'https://www.jakartajs.org',
   },
   plugins: [
@@ -43,19 +42,9 @@ module.exports = {
         siteUrl: 'https://www.jakartajs.org',
       },
     },
-    {
-      resolve: 'gatsby-plugin-postcss-sass',
-      options: {
-        postCssPlugins: [
-          cssnext({
-            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
-          }),
-        ],
-      },
-    },
+    'gatsby-plugin-emotion',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-twitter',
-    'gatsby-plugin-react-next',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify',
