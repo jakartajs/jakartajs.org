@@ -6,8 +6,8 @@ import * as PropTypes from 'prop-types';
 class HTML extends React.Component {
   static propTypes = {
     body: PropTypes.string.isRequired,
-    htmlAttributes: PropTypes.object.isRequired,
-    bodyAttributes: PropTypes.object.isRequired,
+    htmlAttributes: PropTypes.object,
+    bodyAttributes: PropTypes.object,
     preBodyComponents: PropTypes.arrayOf(PropTypes.node).isRequired,
     postBodyComponents: PropTypes.arrayOf(PropTypes.node).isRequired,
     headComponents: PropTypes.arrayOf(PropTypes.node).isRequired,

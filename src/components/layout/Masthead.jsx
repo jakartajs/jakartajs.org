@@ -13,7 +13,7 @@ const Masthead = ({ menuItems, isHomepage }) => (
     <Container>
       <MastheadInner>
         <MastheadLogo>
-          <Link href="/" to="/">
+          <Link href="/" to="/" aria-label="JakartaJS Home">
             <Logo transparent height={48} />
           </Link>
         </MastheadLogo>
@@ -96,7 +96,7 @@ const MastheadNavLink = styled(Link)`
   height: 100%;
   margin: 0 1rem;
   padding: 0.25rem 0;
-  color: ${props => transparentize(0.3, props.theme.pallette.grey100)};
+  color: ${props => transparentize(0.1, props.theme.pallette.grey100)};
 
   &:first-of-type {
     margin-left: 0;
