@@ -4,7 +4,7 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
-import moment from 'moment';
+import format from 'date-fns/format';
 import styled from 'react-emotion';
 
 import PageContainer from '../components/page/PageContainer';
@@ -38,15 +38,19 @@ class EventsPage extends React.Component {
 
   static renderEvents(events) {
     return events.length !== 0 ? (
-      events.map(event => (
-        <EventCard key={event.id}>
-          <EventDate dateTime={new Date(event.time).toISOString()}>{moment(event.time).format('LLLL')}</EventDate>
-          <EventTitle>{event.name}</EventTitle>
-          <EventLocation>
-            <strong>{event.venue.name}</strong> &middot; {event.venue.address_1}
-          </EventLocation>
-        </EventCard>
-      ))
+      events.map(event => {
+        const dateTime = new Date(event.time);
+
+        return (
+          <EventCard key={event.id}>
+            <EventDate dateTime={dateTime.toISOString()}>{format(dateTime, 'dddd, D MMMM YYYY - HH:mm')}</EventDate>
+            <EventTitle>{event.name}</EventTitle>
+            <EventLocation>
+              <strong>{event.venue.name}</strong> &middot; {event.venue.address_1}
+            </EventLocation>
+          </EventCard>
+        );
+      })
     ) : (
       <EventEmpty />
     );

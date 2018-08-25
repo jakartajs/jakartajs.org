@@ -4,7 +4,7 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
-import moment from 'moment';
+import format from 'date-fns/format';
 import styled from 'react-emotion';
 
 import { HeaderImage } from '../assets/images';
@@ -51,7 +51,9 @@ class IndexPage extends React.Component {
         <NextEventContainer>
           <h1>{events[0].name}</h1>
           <p className="lead">
-            <time dateTime={new Date(events[0].time).toISOString()}>{moment(events[0].time).format('LLLL')}</time>
+            <time dateTime={new Date(events[0].time).toISOString()}>
+              {format(new Date(events[0].time), 'dddd, D MMMM YYYY - HH:mm')}
+            </time>
           </p>
           <p>
             <strong>{events[0].venue.name}</strong>
