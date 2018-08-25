@@ -1,8 +1,10 @@
-/* eslint-disable import/extensions */
+/* eslint-disable import/extensions, import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { StaticQuery, graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import styled from 'react-emotion';
+import { Location } from '@reach/router';
 import { ThemeProvider } from 'emotion-theming';
 
 import 'typeface-ibm-plex-mono';
@@ -24,28 +26,52 @@ const menuItems = [
   },
 ];
 
-const TemplateWrapper = ({ children, data, location }) => (
-  <ThemeProvider theme={theme}>
-    <Root>
-      <Helmet
-        title={`${data.site.siteMetadata.title} · ${data.site.siteMetadata.subtitle}`}
-        meta={[
-          { name: 'description', content: data.site.siteMetadata.description },
-          { property: 'og:site_name', content: data.site.siteMetadata.title },
-          { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: data.site.siteMetadata.title },
-          { property: 'og:description', content: data.site.siteMetadata.description },
-        ]}
-      />
-      <Masthead siteName={data.site.siteMetadata.title} isHomepage={location.pathname === '/'} menuItems={menuItems} />
-      {children()}
-      <Footer siteName={data.site.siteMetadata.title} />
-    </Root>
-  </ThemeProvider>
+const TemplateWrapper = ({ children }) => (
+  <StaticQuery
+    query={graphql`
+      query IndexQuery {
+        site {
+          siteMetadata {
+            title
+            subtitle
+            description
+          }
+        }
+      }
+    `}
+  >
+    {data => (
+      <ThemeProvider theme={theme}>
+        <Root>
+          <Helmet
+            title={`${data.site.siteMetadata.title} · ${data.site.siteMetadata.subtitle}`}
+            meta={[
+              { name: 'description', content: data.site.siteMetadata.description },
+              { property: 'og:site_name', content: data.site.siteMetadata.title },
+              { property: 'og:type', content: 'website' },
+              { property: 'og:title', content: data.site.siteMetadata.title },
+              { property: 'og:description', content: data.site.siteMetadata.description },
+            ]}
+          />
+          <Location>
+            {({ location }) => (
+              <Masthead
+                siteName={data.site.siteMetadata.title}
+                isHomepage={location.pathname === '/'}
+                menuItems={menuItems}
+              />
+            )}
+          </Location>
+          {children}
+          <Footer siteName={data.site.siteMetadata.title} />
+        </Root>
+      </ThemeProvider>
+    )}
+  </StaticQuery>
 );
 
 TemplateWrapper.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
   data: PropTypes.shape({
     site: PropTypes.shape({
       siteMetadata: PropTypes.shape({
@@ -55,22 +81,9 @@ TemplateWrapper.propTypes = {
       }),
     }),
   }).isRequired,
-  location: PropTypes.shape({}).isRequired,
 };
 
 export default TemplateWrapper;
-
-export const query = graphql`
-  query IndexQuery {
-    site {
-      siteMetadata {
-        title
-        subtitle
-        description
-      }
-    }
-  }
-`;
 
 const Root = styled('div')`
   display: flex;

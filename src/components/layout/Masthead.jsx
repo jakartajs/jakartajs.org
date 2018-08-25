@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { transparentize } from 'polished';
 import * as PropTypes from 'prop-types';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import styled from 'react-emotion';
 
 import { formatPx, formatEm } from '../../styles/utils';

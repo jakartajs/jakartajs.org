@@ -1,4 +1,4 @@
-/* eslint-disable react/prefer-stateless-function, react/prop-types */
+/* eslint-disable react/prefer-stateless-function, react/forbid-prop-types, react/require-default-props */
 
 import React from 'react';
 import * as PropTypes from 'prop-types';
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
-module.exports = class HTML extends React.Component {
+class HTML extends React.Component {
   static propTypes = {
     body: PropTypes.string.isRequired,
     preBodyComponents: PropTypes.arrayOf(PropTypes.node).isRequired,
@@ -52,4 +52,15 @@ module.exports = class HTML extends React.Component {
       </html>
     );
   }
+}
+
+HTML.propTypes = {
+  htmlAttributes: PropTypes.object,
+  headComponents: PropTypes.array,
+  bodyAttributes: PropTypes.object,
+  preBodyComponents: PropTypes.array,
+  body: PropTypes.string,
+  postBodyComponents: PropTypes.array,
 };
+
+export default HTML;

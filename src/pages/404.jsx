@@ -2,40 +2,43 @@ import React from 'react';
 import styled from 'react-emotion';
 import * as PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import { Link, graphql } from 'gatsby';
 
 import PageMain from '../components/page/PageMain';
 import PageHeader from '../components/page/PageHeader';
 import PageContent from '../components/page/PageContent';
 import PageContainer from '../components/page/PageContainer';
 import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import TemplateWrapper from '../layouts';
 
 const NotFoundPage = ({ data }) => (
-  <PageMain>
-    <Helmet
-      title={`404: Page not found. · ${data.site.siteMetadata.title}`}
-      meta={[
-        { name: 'description', content: data.site.siteMetadata.description },
-        { property: 'og:title', content: '404: Page not found.' },
-        { property: 'og:description', content: data.site.siteMetadata.description },
-      ]}
-    />
-    <PageHeader>
-      <PageHeaderContainer>
-        <h1>Not Found</h1>
-      </PageHeaderContainer>
-    </PageHeader>
-    <PageContent>
-      <ContentInner>
-        <PageContainer>
-          <CodeWrapper>res.status(404).send(&apos;Cannot find this page.&apos;)</CodeWrapper>
-          <Link href="/" to="/">
-            Go back home
-          </Link>
-        </PageContainer>
-      </ContentInner>
-    </PageContent>
-  </PageMain>
+  <TemplateWrapper>
+    <PageMain>
+      <Helmet
+        title={`404: Page not found. · ${data.site.siteMetadata.title}`}
+        meta={[
+          { name: 'description', content: data.site.siteMetadata.description },
+          { property: 'og:title', content: '404: Page not found.' },
+          { property: 'og:description', content: data.site.siteMetadata.description },
+        ]}
+      />
+      <PageHeader>
+        <PageHeaderContainer>
+          <h1>Not Found</h1>
+        </PageHeaderContainer>
+      </PageHeader>
+      <PageContent>
+        <ContentInner>
+          <PageContainer>
+            <CodeWrapper>res.status(404).send(&apos;Cannot find this page.&apos;)</CodeWrapper>
+            <Link href="/" to="/">
+              Go back home
+            </Link>
+          </PageContainer>
+        </ContentInner>
+      </PageContent>
+    </PageMain>
+  </TemplateWrapper>
 );
 
 NotFoundPage.propTypes = {

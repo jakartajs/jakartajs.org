@@ -4,8 +4,6 @@
 
 require('dotenv').config();
 
-const cssnext = require('postcss-cssnext');
-
 module.exports = {
   siteMetadata: {
     title: 'JakartaJS',
@@ -44,20 +42,9 @@ module.exports = {
         siteUrl: 'https://www.jakartajs.org',
       },
     },
-    {
-      resolve: 'gatsby-plugin-postcss-sass',
-      options: {
-        postCssPlugins: [
-          cssnext({
-            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
-          }),
-        ],
-      },
-    },
     'gatsby-plugin-emotion',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-twitter',
-    'gatsby-plugin-react-next',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify',
