@@ -25,7 +25,6 @@ import Container from '../components/layout/Container';
 import AnchorButton from '../components/layout/AnchorButton';
 import PageMain from '../components/page/PageMain';
 import LinkButton from '../components/layout/LinkButton';
-import TemplateWrapper from '../layouts';
 
 class IndexPage extends React.Component {
   static propTypes = {
@@ -110,59 +109,52 @@ class IndexPage extends React.Component {
     const { loading, errors, events } = this.state;
 
     return (
-      <TemplateWrapper>
-        <PageMain>
-          <Helmet
-            meta={[
-              { name: 'description', content: data.site.siteMetadata.description },
-              { property: 'og:title', content: data.site.siteMetadata.subtitle },
-              { property: 'og:description', content: data.site.siteMetadata.description },
-            ]}
-          />
-          <HomepageHeader>
-            <HomepageHeaderImage src={HeaderImage} alt={data.site.siteMetadata.subtitle} />
-            <HomepageHeaderInner>
-              <Container>
-                <HomepageHeaderCard title="Jakarta JavaScript User Group">
-                  <LeadText>
-                    Come and meet other developers &amp; industry leaders interested in JavaScript and its ecosystem in
-                    the Greater Jakarta area.
-                  </LeadText>
-                </HomepageHeaderCard>
-              </Container>
-            </HomepageHeaderInner>
-          </HomepageHeader>
-          <NextEventSection>
-            {loading
-              ? IndexPage.renderLoading()
-              : errors
-                ? IndexPage.renderErrors(errors)
-                : IndexPage.renderEvent(events)}
-          </NextEventSection>
-          <JoinUsSection>
-            <JoinUsContainer>
-              <h2>Join Us</h2>
-              <p>
-                Our meetups are free to attend and open to anyone. You can also join our Slack and talk with members of
-                community, as well as experts in their field.
-              </p>
-              <div>
-                <AnchorButton
-                  href="https://jakartajs-join.herokuapp.com/"
-                  kind="invertedsecondary"
-                  size="medium"
-                  newTab
-                >
-                  Join Our Slack
-                </AnchorButton>{' '}
-                <LinkButton to="/events" kind="invertedwhite" size="medium" newTab>
-                  View Past Events
-                </LinkButton>
-              </div>
-            </JoinUsContainer>
-          </JoinUsSection>
-        </PageMain>
-      </TemplateWrapper>
+      <PageMain>
+        <Helmet
+          meta={[
+            { name: 'description', content: data.site.siteMetadata.description },
+            { property: 'og:title', content: data.site.siteMetadata.subtitle },
+            { property: 'og:description', content: data.site.siteMetadata.description },
+          ]}
+        />
+        <HomepageHeader>
+          <HomepageHeaderImage src={HeaderImage} alt={data.site.siteMetadata.subtitle} />
+          <HomepageHeaderInner>
+            <Container>
+              <HomepageHeaderCard title="Jakarta JavaScript User Group">
+                <LeadText>
+                  Come and meet other developers &amp; industry leaders interested in JavaScript and its ecosystem in
+                  the Greater Jakarta area.
+                </LeadText>
+              </HomepageHeaderCard>
+            </Container>
+          </HomepageHeaderInner>
+        </HomepageHeader>
+        <NextEventSection>
+          {loading
+            ? IndexPage.renderLoading()
+            : errors
+              ? IndexPage.renderErrors(errors)
+              : IndexPage.renderEvent(events)}
+        </NextEventSection>
+        <JoinUsSection>
+          <JoinUsContainer>
+            <h2>Join Us</h2>
+            <p>
+              Our meetups are free to attend and open to anyone. You can also join our Slack and talk with members of
+              community, as well as experts in their field.
+            </p>
+            <div>
+              <AnchorButton href="https://jakartajs-join.herokuapp.com/" kind="invertedsecondary" size="medium" newTab>
+                Join Our Slack
+              </AnchorButton>{' '}
+              <LinkButton to="/events" kind="invertedwhite" size="medium" newTab>
+                View Past Events
+              </LinkButton>
+            </div>
+          </JoinUsContainer>
+        </JoinUsSection>
+      </PageMain>
     );
   }
 }

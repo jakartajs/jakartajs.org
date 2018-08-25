@@ -42,6 +42,12 @@ module.exports = {
         siteUrl: 'https://www.jakartajs.org',
       },
     },
+    {
+      resolve: 'gatsby-plugin-layout',
+      options: {
+        component: require.resolve('./src/layouts/index.jsx'),
+      },
+    },
     'gatsby-plugin-emotion',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-twitter',

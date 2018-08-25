@@ -3,20 +3,11 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-let styles;
-if (process.env.NODE_ENV === 'production') {
-  try {
-    // eslint-disable-next-line
-    styles = require('!raw-loader!../public/styles.css');
-  } catch (e) {
-    // eslint-disable-next-line
-    console.log(e);
-  }
-}
-
 class HTML extends React.Component {
   static propTypes = {
     body: PropTypes.string.isRequired,
+    htmlAttributes: PropTypes.object.isRequired,
+    bodyAttributes: PropTypes.object.isRequired,
     preBodyComponents: PropTypes.arrayOf(PropTypes.node).isRequired,
     postBodyComponents: PropTypes.arrayOf(PropTypes.node).isRequired,
     headComponents: PropTypes.arrayOf(PropTypes.node).isRequired,
@@ -24,10 +15,6 @@ class HTML extends React.Component {
 
   render() {
     const { htmlAttributes, headComponents, bodyAttributes, preBodyComponents, body, postBodyComponents } = this.props;
-    let css;
-    if (process.env.NODE_ENV === 'production') {
-      css = <style id="gatsby-inlined-css" dangerouslySetInnerHTML={{ __html: styles }} />;
-    }
 
     return (
       <html lang="en" {...htmlAttributes}>
@@ -41,7 +28,6 @@ class HTML extends React.Component {
           <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
-          {css}
           {headComponents}
         </head>
         <body {...bodyAttributes}>
@@ -53,14 +39,5 @@ class HTML extends React.Component {
     );
   }
 }
-
-HTML.propTypes = {
-  htmlAttributes: PropTypes.object,
-  headComponents: PropTypes.array,
-  bodyAttributes: PropTypes.object,
-  preBodyComponents: PropTypes.array,
-  body: PropTypes.string,
-  postBodyComponents: PropTypes.array,
-};
 
 export default HTML;
