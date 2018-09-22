@@ -40,46 +40,42 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 };
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  return new Promise((resolve, reject) => {
-    graphql(`
-      {
-        allMarkdownRemark {
-          edges {
-            node {
-              fields {
-                slug
-                layout
-              }
+  const allMarkdown = await graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
+              layout
             }
           }
         }
       }
-    `).then(res => {
-      if (res.errors) {
-        reject(res.errors);
-      }
+    }
+  `);
 
-      res.data.allMarkdownRemark.edges.forEach(({ node }) => {
-        const { slug, layout } = node.fields;
+  if (allMarkdown.errors) {
+    throw new Error(allMarkdown.errors);
+  }
 
-        createPage({
-          path: slug,
-          // Feel free to set any `layout` as you'd like in the frontmatter, as
-          // long as the corresponding template file exists in src/templates.
-          // If no template is set, it will fall back to the default `page`
-          // template.
-          component: path.resolve(`./src/templates/${layout || 'page'}.jsx`),
-          context: {
-            // Data passed to context is available in page queries as GraphQL variables.
-            slug,
-          },
-        });
-      });
+  allMarkdown.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const { slug, layout } = node.fields;
 
-      resolve();
+    createPage({
+      path: slug,
+      // Feel free to set any `layout` as you'd like in the frontmatter, as
+      // long as the corresponding template file exists in src/templates.
+      // If no template is set, it will fall back to the default `page`
+      // template.
+      component: path.resolve(`./src/templates/${layout || 'page'}.jsx`),
+      context: {
+        // Data passed to context is available in page queries as GraphQL variables.
+        slug,
+      },
     });
   });
 };
