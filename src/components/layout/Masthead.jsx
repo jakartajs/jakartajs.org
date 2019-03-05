@@ -88,9 +88,7 @@ const MastheadLogo = styled('div')`
   }
 `;
 
-const MastheadNav = styled('nav')`
-  height: 100%;
-`;
+const MastheadNav = styled('nav')``;
 
 const MastheadNavLink = styled(Link)`
   height: 100%;
