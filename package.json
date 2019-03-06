@@ -6,8 +6,8 @@
   "dependencies": {
     "babel-plugin-emotion": "^9.2.10",
     "classnames": "^2.2.6",
-    "date-fns": "^1.29.0",
-    "dotenv": "^6.0.0",
+    "date-fns": "^1.30.1",
+    "dotenv": "^6.2.0",
     "emotion": "^9.2.10",
     "emotion-server": "^9.2.10",
     "emotion-theming": "^9.2.9",
@@ -25,12 +25,12 @@
     "gatsby-plugin-typescript": "^2.0.10",
     "gatsby-remark-autolink-headers": "^2.0.15",
     "gatsby-remark-copy-linked-files": "^2.0.9",
-    "gatsby-remark-prismjs": "^3.0.0",
+    "gatsby-remark-prismjs": "^3.2.4",
     "gatsby-remark-responsive-iframe": "^2.0.9",
     "gatsby-remark-smartypants": "^2.0.8",
     "gatsby-source-filesystem": "^2.0.23",
     "gatsby-transformer-remark": "^2.3.0",
-    "normalize.css": "^8.0.0",
+    "normalize.css": "^8.0.1",
     "polished": "^2.1.1",
     "prismjs": "^1.15.0",
     "prop-types": "^15.7.2",
@@ -38,8 +38,8 @@
     "react-dom": "^16.8.3",
     "react-emotion": "^9.2.10",
     "react-helmet": "^5.2.0",
-    "typeface-ibm-plex-mono": "^0.0.56",
-    "typeface-ibm-plex-sans": "^0.0.58"
+    "typeface-ibm-plex-mono": "^0.0.61",
+    "typeface-ibm-plex-sans": "^0.0.61"
   },
   "keywords": [
     "gatsby"
