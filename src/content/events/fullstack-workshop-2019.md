@@ -21,7 +21,7 @@ Workshop ini diselenggarakan selama dua hari.
 
 ### Hari 1
 
-Hari pertama akan fokus membahas _backend_ dengan topik utama NodeJS, Express, MongoDB, TDD, REST API dan deployment.
+Hari pertama akan fokus membahas _backend_ dengan topik utama NodeJS, Express, MongoDB, Testing, REST API dan deployment.
 
 ### Hari 2
 
