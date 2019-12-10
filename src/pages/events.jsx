@@ -65,41 +65,8 @@ class EventsPage extends React.Component {
     );
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true,
-      errors: null,
-      events: [],
-    };
-  }
-
-  componentDidMount() {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    /* eslint-disable max-len */
-    const url =
-      'https://api.meetup.com/JakartaJS/events?desc=true&photo-host=public&page=10&sig_id=246266290&status=past&sig=cc814c7fd928ddf63515374e5cc6ced7b20fbca2';
-    /* eslint-enable max-len */
-    fetch(proxyUrl + url)
-      .then(res => res.json())
-      .then(json =>
-        this.setState({
-          loading: false,
-          events: json,
-        }),
-      )
-      .catch(err =>
-        this.setState({
-          loading: false,
-          errors: err.stack,
-        }),
-      );
-  }
-
   render() {
     const { data, location } = this.props;
-    const { loading, errors, events } = this.state;
 
     return (
       <TemplateWrapper location={location}>
@@ -127,12 +94,6 @@ class EventsPage extends React.Component {
           </PageHeader>
           <PageContent>
             <PageContainer>
-              {loading
-                ? EventsPage.renderLoading()
-                : errors
-                  ? EventsPage.renderErrors(errors)
-                  : EventsPage.renderEvents(events)}
-
               <ButtonWrapper>
                 <AnchorButton size="large" href="https://www.meetup.com/JakartaJS/events/past/" newTab>
                   View Past Events

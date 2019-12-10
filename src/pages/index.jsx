@@ -13,7 +13,6 @@ import HomepageHeaderInner from '../components/home/HomepageHeaderInner';
 import HomepageHeaderCard from '../components/home/HomepageHeaderCard';
 import {
   NextEventHeader,
-  NextEventSection,
   NextEventContainer,
   NextEventLoading,
   NextEventEmpty,
@@ -24,7 +23,6 @@ import { JoinUsSection, JoinUsContainer } from '../components/home/JoinUs';
 import Container from '../components/layout/Container';
 import AnchorButton from '../components/layout/AnchorButton';
 import PageMain from '../components/page/PageMain';
-import LinkButton from '../components/layout/LinkButton';
 import TemplateWrapper from '../layouts';
 
 class IndexPage extends React.Component {
@@ -76,41 +74,8 @@ class IndexPage extends React.Component {
     return <NextEventError errors={errors} />;
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true,
-      errors: null,
-      events: [],
-    };
-  }
-
-  componentDidMount() {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    /* eslint-disable max-len */
-    const url =
-      'https://api.meetup.com/JakartaJS/events?desc=true&photo-host=public&page=1&sig_id=246266290&sig=ddf6a4c4c3fb24dee8fd3869bc8a2e718763bbbe';
-    /* eslint-enable max-len */
-    fetch(proxyUrl + url)
-      .then(res => res.json())
-      .then(json =>
-        this.setState({
-          loading: false,
-          events: json,
-        }),
-      )
-      .catch(err =>
-        this.setState({
-          loading: false,
-          errors: err.stack,
-        }),
-      );
-  }
-
   render() {
     const { data, location } = this.props;
-    const { loading, errors, events } = this.state;
 
     return (
       <TemplateWrapper isHomepage location={location}>
@@ -135,13 +100,6 @@ class IndexPage extends React.Component {
               </Container>
             </HomepageHeaderInner>
           </HomepageHeader>
-          <NextEventSection>
-            {loading
-              ? IndexPage.renderLoading()
-              : errors
-                ? IndexPage.renderErrors(errors)
-                : IndexPage.renderEvent(events)}
-          </NextEventSection>
           <JoinUsSection>
             <JoinUsContainer>
               <h2>Join Us</h2>
@@ -150,17 +108,12 @@ class IndexPage extends React.Component {
                 community, as well as experts in their field.
               </p>
               <div>
-                <AnchorButton
-                  href="https://jakartajs-join.herokuapp.com/"
-                  kind="invertedsecondary"
-                  size="medium"
-                  newTab
-                >
-                  Join Our Slack
+                <AnchorButton href="https://www.meetup.com/JakartaJS/events/past/" kind="primary" size="medium" newTab>
+                  View Meetup Page
                 </AnchorButton>{' '}
-                <LinkButton to="/events" kind="invertedwhite" size="medium" newTab>
-                  View Past Events
-                </LinkButton>
+                <AnchorButton href="https://jakartajs-join.herokuapp.com/" kind="inverted" size="medium" newTab>
+                  Join Our Slack
+                </AnchorButton>
               </div>
             </JoinUsContainer>
           </JoinUsSection>

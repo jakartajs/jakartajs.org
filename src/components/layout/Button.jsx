@@ -41,6 +41,7 @@ export const ButtonRoot = styled('button')`
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 2px solid transparent;
 
   &:hover,
   &:focus {
@@ -70,7 +71,7 @@ export const ButtonRoot = styled('button')`
   &.inverted {
     color: ${props => props.theme.colors.brand};
     background-color: transparent;
-    border: 2px solid ${props => props.theme.colors.brand};
+    border-color: ${props => props.theme.colors.brand};
 
     &:hover,
     &:focus {
@@ -81,7 +82,6 @@ export const ButtonRoot = styled('button')`
   &.invertedsecondary {
     color: ${props => props.theme.colors.brand};
     background-color: ${props => props.theme.pallette.white};
-    border: 2px solid transparent;
 
     &:hover,
     &:focus {
@@ -92,7 +92,7 @@ export const ButtonRoot = styled('button')`
   &.invertedwhite {
     color: ${props => props.theme.pallette.white};
     background-color: transparent;
-    border: 2px solid ${props => props.theme.pallette.white};
+    border-color: ${props => props.theme.pallette.white};
 
     &:hover,
     &:focus {
